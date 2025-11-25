@@ -1,55 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free.c                                             :+:      :+:    :+:   */
+/*   operations_2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: absouman <absouman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/06 18:38:30 by absouman          #+#    #+#             */
-/*   Updated: 2025/11/25 15:46:33 by absouman         ###   ########.fr       */
+/*   Created: 2025/11/09 18:30:50 by absouman          #+#    #+#             */
+/*   Updated: 2025/11/09 18:43:22 by absouman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
 
-void	free_stack(t_stack **stack)
+void	pa(t_stack **a, t_stack **b)
 {
-	t_stack	*next_node;
+	t_stack	*first_value;
 
-	while (*stack)
-	{
-		next_node = (*stack)->next;
-		free(*stack);
-		*stack = next_node;
-	}
+	if (!b || !*b)
+		return ;
+	first_value = *b;
+	*b = (*b)->next;
+	first_value->next = *a;
+	*a = first_value;
+	write(1, "pa\n", 3);
 }
 
-void	free_tab(char **tab)
+void	pb(t_stack **a, t_stack **b)
 {
-	int	i;
+	t_stack	*first_value;
 
-	if (!tab)
+	if (!a || !*a)
 		return ;
-	i = 0;
-	while (tab[i])
-	{
-		free(tab[i]);
-		i++;
-	}
-	free(tab);
-}
-
-void	free_split(char **split)
-{
-	int	i;
-
-	if (!split)
-		return ;
-	i = 0;
-	while (split[i])
-	{
-		free(split[i]);
-		i++;
-	}
-	free(split);
+	first_value = *a;
+	*a = (*a)->next;
+	first_value->next = *b;
+	*b = first_value;
+	write(1, "pb\n", 3);
 }

@@ -6,7 +6,7 @@
 /*   By: absouman <absouman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 17:48:07 by absouman          #+#    #+#             */
-/*   Updated: 2025/11/06 18:37:42 by absouman         ###   ########.fr       */
+/*   Updated: 2025/11/13 17:44:32 by absouman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,44 +58,45 @@ static void	ft_free_all(char **lst, int last)
 	free(lst);
 }
 
-static int	fill_words(char **lst, const char *s, char c)
+static const char	*extract_word(const char *s, char c, char **lst, int i)
 {
-	int			i;
-	size_t		len;
 	const char	*start;
+	size_t		len;
 
-	i = 0;
-	while (*s)
-	{
-		while (*s == c)
-			s++;
-		start = s;
-		len = 0;
-		while (*s && *s != c)
-			len++;
-		s++;
-		if (len > 0)
-		{
-			lst[i] = copy_word(start, len);
-			if (!lst[i])
-				return (ft_free_all(lst, i), 0);
-			i++;
-		}
-	}
-	lst[i] = NULL;
-	return (1);
+	start = s;
+	len = 0;
+	while (s[len] && s[len] != c)
+		len++;
+	if (len == 0)
+		return (NULL);
+	lst[i] = copy_word(start, len);
+	if (!lst[i])
+		return (NULL);
+	return (s + len);
 }
 
 char	**ft_split(const char *s, char c)
 {
-	char	**lst;
+	char		**lst;
+	int			i;
 
 	if (!s)
 		return (NULL);
 	lst = malloc((ft_countword(s, c) + 1) * sizeof(char *));
 	if (!lst)
 		return (NULL);
-	if (!fill_words(lst, s, c))
-		return (NULL);
+	i = 0;
+	while (*s)
+	{
+		while (*s == c)
+			s++;
+		s = extract_word(s, c, lst, i);
+		if (!s)
+			break ;
+		if (!lst[i])
+			return (ft_free_all(lst, i), NULL);
+		i++;
+	}
+	lst[i] = NULL;
 	return (lst);
 }

@@ -1,55 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free.c                                             :+:      :+:    :+:   */
+/*   is_sorted.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: absouman <absouman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/06 18:38:30 by absouman          #+#    #+#             */
-/*   Updated: 2025/11/25 15:46:33 by absouman         ###   ########.fr       */
+/*   Created: 2025/11/11 16:48:57 by absouman          #+#    #+#             */
+/*   Updated: 2025/11/11 17:12:58 by absouman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
 
-void	free_stack(t_stack **stack)
+int	is_sorted(t_stack *stack)
 {
-	t_stack	*next_node;
-
-	while (*stack)
+	while (stack && stack->next)
 	{
-		next_node = (*stack)->next;
-		free(*stack);
-		*stack = next_node;
+		if (stack->value > stack->next->value)
+			return (0);
+		stack = stack->next;
 	}
-}
-
-void	free_tab(char **tab)
-{
-	int	i;
-
-	if (!tab)
-		return ;
-	i = 0;
-	while (tab[i])
-	{
-		free(tab[i]);
-		i++;
-	}
-	free(tab);
-}
-
-void	free_split(char **split)
-{
-	int	i;
-
-	if (!split)
-		return ;
-	i = 0;
-	while (split[i])
-	{
-		free(split[i]);
-		i++;
-	}
-	free(split);
+	return (1);
 }

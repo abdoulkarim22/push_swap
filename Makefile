@@ -1,18 +1,20 @@
 NAME = push_swap
-CC = gcc
+CC = cc
 CFLAGS = -Wall -Wextra -Werror
 
 SRC =  push_swap.c \
        src/check_args.c \
+       src/is_sorted.c \
        src/init_stack.c \
        src/operations_1.c \
        src/operations_2.c \
        src/operations_3.c \
        src/operations_4.c \
-       src/sort_big.c \
+       src/sort_big/sort_big.c \
        src/sort_small/sort_small.c \
        src/sort_small/utils.c \
        utils/free.c \
+       utils/ft_strchr.c \
        utils/ft_atoi.c \
        utils/ft_split.c \
        utils/ft_isdigit.c \
@@ -24,7 +26,7 @@ SRC =  push_swap.c \
        utils/ft_error.c
 
 OBJ = $(SRC:.c=.o)
-all = $(NAME)
+all : $(NAME)
 
 $(NAME): $(OBJ)
 	@$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
