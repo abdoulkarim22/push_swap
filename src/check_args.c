@@ -6,7 +6,7 @@
 /*   By: absouman <absouman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/09 13:52:33 by absouman          #+#    #+#             */
-/*   Updated: 2025/11/25 17:06:53 by absouman         ###   ########.fr       */
+/*   Updated: 2025/11/26 15:10:26 by absouman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ static int	count_args(char **argv)
 	return (count);
 }
 
-static void	check_number_and_convert(char *arg, int *table_args, int i,  char **argv)
+static void	check_and_convert(char *arg, int *table_args, int i, char **argv)
 {
 	long	num;
 
@@ -71,7 +71,7 @@ static void	check_number_and_convert(char *arg, int *table_args, int i,  char **
 	}
 	num = ft_atoi(arg);
 	if (num < INT_MIN || num > INT_MAX)
-	   ft_error(NULL, NULL, argv);
+		ft_error(NULL, NULL, argv);
 	table_args[i] = (int)num;
 }
 
@@ -84,7 +84,7 @@ void	check_args(char **argv)
 	count = count_args(argv);
 	table_args = (int *)ft_calloc(count, sizeof(int));
 	if (!table_args)
-			ft_error(NULL, NULL, NULL); 
+		ft_error(NULL, NULL, NULL);
 	i = 0;
 	while (argv[i])
 	{
