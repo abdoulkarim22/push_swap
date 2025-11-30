@@ -6,7 +6,7 @@
 /*   By: absouman <absouman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/09 13:52:33 by absouman          #+#    #+#             */
-/*   Updated: 2025/11/26 15:10:26 by absouman         ###   ########.fr       */
+/*   Updated: 2025/11/30 21:41:57 by absouman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,38 +60,67 @@ static int	count_args(char **argv)
 	return (count);
 }
 
-static void	check_and_convert(char *arg, int *table_args, int i, char **argv)
-{
-	long	num;
+// static void	check_and_convert(char *arg, int *table_args, int i)
+// {
+// 	long	num;
 
-	if (!is_number(arg))
-	{
-		free(table_args);
-		ft_error(NULL, NULL, argv);
-	}
-	num = ft_atoi(arg);
-	if (num < INT_MIN || num > INT_MAX)
-		ft_error(NULL, NULL, argv);
-	table_args[i] = (int)num;
-}
+// 	if (!is_number(arg))
+// 	{
+// 		free(table_args);
+// 		ft_error(NULL, NULL, NULL);
+// 	}
+// 	num = ft_atoi(arg);
+// 	if (num < INT_MIN || num > INT_MAX)
+// 	{
+// 		free(table_args);
+// 		ft_error(NULL, NULL, NULL);
+// 	}
+// 	table_args[i] = (int)num;
+// }
 
-void	check_args(char **argv)
+void	check_args(char **argv, int free_argv)
 {
 	int		i;
 	int		*table_args;
 	int		count;
 
+	if (!argv || !argv[0])
+	{
+		if (free_argv)
+			free_split(argv);
+		ft_error(NULL, NULL, NULL);
+	}
+
 	count = count_args(argv);
 	table_args = (int *)ft_calloc(count, sizeof(int));
 	if (!table_args)
+	{
+		if (free_argv)
+			free_split(argv);
 		ft_error(NULL, NULL, NULL);
+	}
+
 	i = 0;
 	while (argv[i])
 	{
-		check_number_and_convert(argv[i], table_args, i, argv);
+		long num = ft_atoi(argv[i]);
+		if (!is_number(argv[i]) || num < INT_MIN || num > INT_MAX)
+		{
+			free(table_args);
+			if (free_argv)
+				free_split(argv);
+			ft_error(NULL, NULL, NULL);
+		}
+		table_args[i] = (int)num;
 		i++;
 	}
+	
 	if (has_duplicates(table_args, count))
+	{
+		free(table_args);
+		if (free_argv)
+			free_split(argv);
 		ft_error(NULL, NULL, NULL);
+	}
 	free(table_args);
 }

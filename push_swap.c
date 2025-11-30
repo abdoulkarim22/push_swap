@@ -6,19 +6,19 @@
 /*   By: absouman <absouman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 16:28:49 by absouman          #+#    #+#             */
-/*   Updated: 2025/11/25 17:07:11 by absouman         ###   ########.fr       */
+/*   Updated: 2025/11/30 21:28:12 by absouman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void	handle_sort(char **argv)
+static void	handle_sort(char **argv, int free_argv)
 {
 	t_stack	*a;
 	t_stack	*b;
 	int		size;
 
-	check_args(argv);
+	check_args(argv, free_argv);
 	a = NULL;
 	b = NULL;
 	init_stack(&a, &b, argv);
@@ -40,15 +40,27 @@ static void	handle_sort(char **argv)
 int	main(int argc, char **argv)
 {
 	char	**args;
+	int		free_argv;
 
 	if (argc < 2)
 		return (0);
+
 	if (argc == 2)
+	{
 		args = ft_split(argv[1], ' ');
+		free_argv = 1;
+	}
 	else
+	{
 		args = argv + 1;
-	handle_sort(args);
+		free_argv = 0;
+	}
+
+	handle_sort(args, free_argv);
+
 	if (argc == 2)
-		free_tab(args);
+		free_split(args);
+
 	return (0);
 }
+

@@ -6,7 +6,7 @@
 /*   By: absouman <absouman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 18:38:30 by absouman          #+#    #+#             */
-/*   Updated: 2025/11/25 15:46:33 by absouman         ###   ########.fr       */
+/*   Updated: 2025/11/30 20:08:48 by absouman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,17 +39,17 @@ void	free_tab(char **tab)
 	free(tab);
 }
 
-void	free_split(char **split)
+void	free_split(char **split_tab)
 {
 	int	i;
 
-	if (!split)
+	if (!split_tab)
 		return ;
 	i = 0;
-	while (split[i])
+	while (split_tab[i])
 	{
-		free(split[i]);
+		free(split_tab[i]);
 		i++;
 	}
-	free(split);
+	free(split_tab);
 }

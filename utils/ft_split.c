@@ -6,7 +6,7 @@
 /*   By: absouman <absouman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 17:48:07 by absouman          #+#    #+#             */
-/*   Updated: 2025/11/13 17:44:32 by absouman         ###   ########.fr       */
+/*   Updated: 2025/11/30 19:56:19 by absouman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ static char	*copy_word(const char *start, size_t len)
 		word[i] = start[i];
 		i++;
 	}
+	
 	word[i] = '\0';
 	return (word);
 }

@@ -6,7 +6,7 @@
 /*   By: absouman <absouman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 17:33:38 by absouman          #+#    #+#             */
-/*   Updated: 2025/11/25 16:16:42 by absouman         ###   ########.fr       */
+/*   Updated: 2025/11/30 21:29:08 by absouman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,11 @@ int		ft_strncmp(const char *s1, const char *s2, size_t n);
 int		is_sorted(t_stack *stack);
 void	init_stack(t_stack **a, t_stack **b, char **argv);
 char	*ft_strchr(const char *s, int c);
-void	free_split(char **split);
+void	free_split(char **split_tab);
 int		is_number(char *str);
 
 // src fuction prototypes
-void	check_args(char **argv);
+void	check_args(char **argv, int free_argv);
 
 // fuction sa & sb & ss prototypes
 void	sa(t_stack *a);

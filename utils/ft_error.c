@@ -6,7 +6,7 @@
 /*   By: absouman <absouman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 17:47:59 by absouman          #+#    #+#             */
-/*   Updated: 2025/11/25 16:01:51 by absouman         ###   ########.fr       */
+/*   Updated: 2025/11/29 21:14:41 by absouman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,6 @@
 
 void	ft_error(t_stack **a, t_stack **b, char **tab)
 {
-	if (tab)
-	{
-		free_split(tab);
-	}
 	if (a && *a)
 	{
 		free_stack(a);
@@ -26,6 +22,10 @@ void	ft_error(t_stack **a, t_stack **b, char **tab)
 	{
 		free_stack(b);
 	}
-	printf("Error\n");
+	if (tab)
+	{
+		free_tab(tab);
+	}
+	write(2, "Error\n", 6);
 	exit(EXIT_FAILURE);
 }
